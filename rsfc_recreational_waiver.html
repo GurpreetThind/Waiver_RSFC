@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RSFC Recreational Soccer – Waiver & Code of Conduct</title>
+  <style>
+    :root {
+      --bg: #0f172a;        /* slate-900 */
+      --card: #111827;      /* gray-900 */
+      --muted: #94a3b8;     /* slate-400 */
+      --text: #e5e7eb;      /* gray-200 */
+      --accent: #22c55e;    /* green-500 */
+      --danger: #ef4444;    /* red-500 */
+      --ring: #334155;      /* slate-700 */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: linear-gradient(180deg, #0b1220, #0f172a 35%, #0b1220);
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 980px;
+      margin: 40px auto;
+      padding: 16px;
+    }
+    .card {
+      background: rgba(17,24,39,0.8);
+      border: 1px solid #1f2937;
+      border-radius: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+    }
+    header.hero {
+      padding: 28px 28px 14px 28px;
+      border-bottom: 1px solid #1f2937;
+      background: radial-gradient(1200px 260px at 20% -40%, rgba(34,197,94,0.18), transparent 60%),
+                  radial-gradient(1000px 200px at 90% -30%, rgba(96,165,250,0.16), transparent 60%),
+                  linear-gradient(180deg, rgba(17,24,39,0.9), rgba(17,24,39,0.6));
+    }
+    .title { font-size: clamp(1.4rem, 2.6vw, 2.2rem); font-weight: 800; letter-spacing: .3px; }
+    .subtitle { color: var(--muted); margin-top: 6px; font-size: .98rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      padding: 20px;
+    }
+
+    @media (min-width: 820px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    fieldset {
+      border: 1px solid #1f2937;
+      border-radius: 14px;
+      padding: 16px;
+      background: rgba(2,6,23,0.4);
+    }
+    legend { padding: 0 8px; color: var(--muted); font-size: .95rem; }
+
+    label { display: block; font-weight: 600; margin-bottom: 6px; }
+    input[type="text"], input[type="email"], input[type="date"], textarea {
+      width: 100%;
+      background: #0b1220;
+      border: 1px solid var(--ring);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      outline: none;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(34,197,94,.15); }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    button {
+      appearance: none; border: 0; cursor: pointer;
+      font-weight: 700; border-radius: 12px; padding: 12px 16px;
+    }
+    .btn-primary { background: var(--accent); color: #062a11; }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--ring); }
+    .btn-danger { background: var(--danger); color: white; }
+
+    .section { padding: 20px; border-top: 1px solid #1f2937; }
+    .section h2 { margin: 0 0 10px; font-size: 1.1rem; letter-spacing: .2px; }
+    .section h3 { margin: 16px 0 6px; font-size: 1rem; color: var(--muted); }
+
+    .content p { margin: 8px 0 12px; }
+    .content ul { margin: 10px 0 16px 20px; }
+    .content li { margin: 6px 0; }
+
+    .ack { margin-top: 16px; padding: 12px; border: 1px dashed var(--ring); border-radius: 12px; background: rgba(2,6,23,0.35); }
+    .ack label { display: inline; font-weight: 500; }
+
+    /* Signature canvas */
+    .sig-wrap { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .sig-pad { background: white; border-radius: 10px; border: 1px solid #334155; height: 160px; }
+
+    footer.note { padding: 14px 20px 24px; color: var(--muted); font-size: .9rem; }
+
+    /* Print styles for tidy PDF output */
+    @media print {
+      body { background: white; color: black; }
+      .card { box-shadow: none; border: none; }
+      header.hero { background: none; border-bottom: 2px solid #000; }
+      .actions { display: none !important; }
+      input, textarea { border: 1px solid #777 !important; color: #000 !important; }
+      .sig-pad { border: 1px solid #000; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card" role="region" aria-label="RSFC Waiver Form">
+      <header class="hero">
+        <div class="title">RSFC Recreational Soccer – Waiver & Code of Conduct</div>
+        <div class="subtitle">Complete the form below. You can print or save a PDF copy once finished.</div>
+      </header>
+
+      <!-- Participant Info -->
+      <div class="grid" id="participant-grid">
+        <fieldset>
+          <legend>Participant</legend>
+          <label for="fullName">Full Name</label>
+          <input id="fullName" name="fullName" type="text" autocomplete="name" required />
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="text" autocomplete="tel" />
+        </fieldset>
+
+        <fieldset>
+          <legend>Emergency Contact</legend>
+          <label for="emgName">Contact Name</label>
+          <input id="emgName" name="emgName" type="text" />
+          <label for="emgPhone">Contact Phone</label>
+          <input id="emgPhone" name="emgPhone" type="text" />
+          <label for="date">Date</label>
+          <input id="date" name="date" type="date" required />
+        </fieldset>
+      </div>
+
+      <!-- Assumption of Risks -->
+      <section class="section content" aria-labelledby="risks-h2">
+        <h2 id="risks-h2">ASSUMPTION OF RISKS</h2>
+        <p>
+          In consideration of my participation in the <strong>RSFC Recreational Soccer League</strong>, and for other good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, <strong>I, the undersigned, state as follows:</strong>
+        </p>
+        <ul>
+          <li>I am aware of the possible <strong>risks, dangers, and hazards</strong> associated with participating as part of a team or as an individual in RSFC recreational <strong>soccer</strong> games and related activities (the “Activity”).</li>
+          <li>I understand that in engaging in the Activity there is the possible risk of <strong>serious, severe, or fatal injury</strong> to myself or others, and/or property damage.</li>
+          <li>I acknowledge that I am <strong>voluntarily participating</strong> in the Activity with knowledge of the dangers involved and I <strong>agree to accept and assume all risks</strong> of injury, illness, disability, death, or property damage arising from my participation, whether caused by the negligence of RSFC or otherwise.</li>
+          <li>I acknowledge my responsibility to consult my <strong>physician</strong> and to cease participation if I experience symptoms such as shortness of breath, dizziness, or chest pain.</li>
+        </ul>
+      </section>
+
+      <!-- Agreement & Waiver -->
+      <section class="section content" aria-labelledby="agree-h2">
+        <h2 id="agree-h2">AGREEMENT AND WAIVER</h2>
+        <ul>
+          <li><strong>Waiver of Claims:</strong> I waive any and all claims arising from my participation in <strong>soccer</strong> that I have or may have in the future against <strong>RSFC</strong>, its directors, officers, employees, game officials, volunteers and representatives (the “Releasees”), including those arising out of negligence, breach of contract, or breach of statutory duty of care.</li>
+          <li><strong>Covenant Not to Sue:</strong> I will not make or bring any such claim against any Releasee, and I forever release and discharge the Releasees from liability under such claims.</li>
+          <li><strong>Health & Compliance:</strong> I confirm that I am in good health and will follow all instructions, recommendations, and cautions of RSFC and its staff at all times during the Activity.</li>
+          <li><strong>Release of Liability:</strong> I release the Releasees from any and all liability for death or any loss, damage, injury, or expense that I or my next of kin may suffer, arising from my participation in the Activity or due to any cause whatsoever.</li>
+          <li><strong>Indemnity:</strong> I will defend, indemnify, and hold harmless the Releasees against any and all losses, liabilities, damages, or costs of whatever kind arising out of or related to my participation, including third-party claims.</li>
+          <li><strong>Severability:</strong> Each provision of this Agreement is enforceable independently. If any provision is unenforceable, the remaining provisions remain effective, binding, and enforceable.</li>
+          <li><strong>Media Consent:</strong> I authorize RSFC to photograph and video me at the Activity and to use such materials in any media now known or later developed for promotional purposes without compensation.</li>
+          <li><strong>Privacy:</strong> I authorize RSFC to collect, use, and disclose my personal information in accordance with applicable privacy laws, including the Personal Information Protection and Electronic Documents Act (PIPEDA) and relevant provincial legislation.</li>
+          <li><strong>Electronic Communications:</strong> I consent to receive electronic communications from RSFC related to services, benefits, and informational opportunities connected to the Activity.</li>
+          <li><strong>Withdrawal of Consent:</strong> I understand I may withdraw consent for certain uses of my information by contacting RSFC; I acknowledge that withdrawal may limit RSFC’s ability to provide me with important Activity information and does not affect the remaining terms of this Agreement.</li>
+          <li><strong>Binding Effect:</strong> I acknowledge that this Agreement is binding upon my heirs, next of kin, executors, administrators, assigns, and representatives.</li>
+        </ul>
+      </section>
+
+      <!-- Code of Conduct -->
+      <section class="section content" aria-labelledby="coc-h2">
+        <h2 id="coc-h2">CODE OF CONDUCT FOR PARTICIPANTS</h2>
+        <p>RSFC aims to provide all participants with a <strong>safe, competitive, and enjoyable soccer environment</strong>. By taking part, I agree to:</p>
+        <ul>
+          <li>Treat all participants, officials, and staff with <strong>courtesy and respect</strong>, prohibiting any form of harassment or discrimination.</li>
+          <li><strong>Abide by the rules</strong> and regulations of RSFC and the sport of soccer.</li>
+          <li><strong>Refrain from dangerous play</strong>, whether deliberate or accidental.</li>
+          <li>Avoid <strong>verbal or physical abuse</strong> of referees, players, spectators, or staff.</li>
+          <li>Not participate under the influence of <strong>alcohol or recreational drugs</strong>.</li>
+          <li><strong>Fulfill all scheduled fixtures</strong> except in exceptional personal circumstances.</li>
+          <li><strong>Respect facilities and equipment</strong>; intentional or reckless damage may result in disciplinary action.</li>
+        </ul>
+        <p>Failure to comply may result in <strong>suspension or expulsion</strong> from the league or program, with <strong>no refunds</strong> issued.</p>
+      </section>
+
+      <!-- Acknowledgement & Signature -->
+      <section class="section content" aria-labelledby="ack-h2">
+        <h2 id="ack-h2">ACKNOWLEDGEMENT & SIGNATURE</h2>
+        <div class="ack">
+          <input id="agree" type="checkbox" required />
+          <label for="agree"> I have read and fully understand this Agreement, acknowledge that I am giving up substantial legal rights by signing it, and sign freely and voluntarily. I intend my signature to be a complete and unconditional release of all liability to the greatest extent permitted by law.</label>
+        </div>
+        <div class="sig-wrap" aria-label="Signature">
+          <label for="signature">Digital Signature (sign in the box)</label>
+          <canvas id="sigpad" class="sig-pad" aria-label="Signature Canvas"></canvas>
+          <div class="actions">
+            <button type="button" class="btn-ghost" id="sig-undo">Undo</button>
+            <button type="button" class="btn-danger" id="sig-clear">Clear</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Form Actions -->
+      <section class="section">
+        <div class="actions">
+          <button type="button" class="btn-primary" id="btn-print" title="Print or Save to PDF">Print / Save as PDF</button>
+          <button type="button" class="btn-ghost" id="btn-save" title="Save your filled data locally (JSON)">Save Data</button>
+          <button type="button" class="btn-ghost" id="btn-load" title="Load previously saved data">Load Data</button>
+          <span id="status" aria-live="polite" style="margin-left:8px;color:var(--muted);"></span>
+        </div>
+      </section>
+
+      <footer class="note">
+        <strong>How to save a local copy:</strong> After completing the form and signing, click <em>Print / Save as PDF</em> and choose <em>Save as PDF</em> in the destination printer. You can also use <em>Save Data</em> to download a JSON backup of your entries and <em>Load Data</em> to restore them later.
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Autofill today's date
+    (function initDate() {
+      const date = document.getElementById('date');
+      if (date && !date.value) {
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        date.value = `${yyyy}-${mm}-${dd}`;
+      }
+    })();
+
+    // Signature pad (vanilla)
+    (function signaturePad() {
+      const canvas = document.getElementById('sigpad');
+      const ctx = canvas.getContext('2d');
+      let drawing = false;
+      let strokes = []; // stack of paths for undo
+      let currentPath = [];
+
+      function resizeCanvas() {
+        const data = canvas.toDataURL();
+        // Scale for DPR clarity
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * ratio;
+        canvas.height = rect.height * ratio;
+        ctx.scale(ratio, ratio);
+        // Restore (simple): re-render strokes
+        redraw();
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      function start(x, y) {
+        drawing = true;
+        currentPath = [{ x, y }];
+      }
+      function move(x, y) {
+        if (!drawing) return;
+        const last = currentPath[currentPath.length - 1];
+        currentPath.push({ x, y });
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = '#111827';
+        ctx.beginPath();
+        ctx.moveTo(last.x, last.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+      function end() {
+        if (!drawing) return;
+        drawing = false;
+        if (currentPath.length > 1) strokes.push(currentPath);
+        currentPath = [];
+      }
+      function redraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(Math.max(window.devicePixelRatio||1,1), Math.max(window.devicePixelRatio||1,1));
+        ctx.restore();
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = '#111827';
+        strokes.forEach(path => {
+          for (let i=1;i<path.length;i++){
+            ctx.beginPath();
+            ctx.moveTo(path[i-1].x, path[i-1].y);
+            ctx.lineTo(path[i].x, path[i].y);
+            ctx.stroke();
+          }
+        });
+      }
+
+      // Mouse
+      canvas.addEventListener('mousedown', e => start(e.offsetX, e.offsetY));
+      canvas.addEventListener('mousemove', e => move(e.offsetX, e.offsetY));
+      window.addEventListener('mouseup', end);
+      // Touch
+      canvas.addEventListener('touchstart', e => {
+        const r = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        start(t.clientX - r.left, t.clientY - r.top);
+        e.preventDefault();
+      }, { passive: false });
+      canvas.addEventListener('touchmove', e => {
+        const r = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        move(t.clientX - r.left, t.clientY - r.top);
+        e.preventDefault();
+      }, { passive: false });
+      window.addEventListener('touchend', end);
+
+      // Controls
+      document.getElementById('sig-clear').addEventListener('click', () => { strokes = []; redraw(); });
+      document.getElementById('sig-undo').addEventListener('click', () => { if (strokes.length) { strokes.pop(); redraw(); } });
+
+      // Export helper for print embedding
+      window.getSignatureDataURL = () => strokes.length ? canvas.toDataURL('image/png') : '';
+    })();
+
+    // Save/Load data (JSON) & Print
+    (function io() {
+      const status = document.getElementById('status');
+      const fields = ['fullName','email','phone','emgName','emgPhone','date'];
+
+      document.getElementById('btn-save').addEventListener('click', () => {
+        const data = Object.fromEntries(fields.map(id => [id, document.getElementById(id).value]));
+        data.agree = document.getElementById('agree').checked;
+        data.signature = window.getSignatureDataURL();
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        const dateStr = new Date().toISOString().split('T')[0];
+        a.download = `RSFC-waiver-${data.fullName || 'participant'}-${dateStr}.json`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+        status.textContent = 'Saved data as JSON.';
+      });
+
+      document.getElementById('btn-load').addEventListener('click', async () => {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'application/json';
+        input.onchange = async () => {
+          const file = input.files[0];
+          if (!file) return;
+          const text = await file.text();
+          try {
+            const data = JSON.parse(text);
+            fields.forEach(id => { if (data[id] !== undefined) document.getElementById(id).value = data[id]; });
+            document.getElementById('agree').checked = !!data.agree;
+            if (data.signature) {
+              const img = new Image();
+              img.onload = () => {
+                const canvas = document.getElementById('sigpad');
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              };
+              img.src = data.signature;
+            }
+            status.textContent = 'Loaded saved data.';
+          } catch (e) {
+            status.textContent = 'Invalid file.';
+          }
+        };
+        input.click();
+      });
+
+      document.getElementById('btn-print').addEventListener('click', () => {
+        // Basic client validation
+        const requiredIds = ['fullName','email','date'];
+        for (const id of requiredIds) {
+          const el = document.getElementById(id);
+          if (!el.value) { alert('Please complete required fields before printing/saving.'); el.focus(); return; }
+        }
+        if (!document.getElementById('agree').checked) {
+          alert('Please agree to the acknowledgement before printing/saving.');
+          return;
+        }
+        window.print();
+      });
+    })();
+  </script>
+</body>
+</html>
